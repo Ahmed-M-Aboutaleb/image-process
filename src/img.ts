@@ -72,9 +72,7 @@ async function getAvailableImages(): Promise<string[]> {
  *
  */
 
-export async function isImageAvailable(
-    filename: string = ''
-): Promise<boolean> {
+export async function isImageAvailable(filename: string): Promise<boolean> {
     if (!filename) {
         return false;
     }

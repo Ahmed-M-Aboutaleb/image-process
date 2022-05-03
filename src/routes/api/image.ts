@@ -11,8 +11,8 @@ export const imageApi = express.Router();
 
 imageApi.get('/images', async (req: Request, res: Response) => {
     const fileName: unknown = req.query.filename;
-    const width: number = Number(req.query.width);
-    const height: number = Number(req.query.height);
+    const width = Number(req.query.width);
+    const height = Number(req.query.height);
 
     if (fileName && width && height) {
         const img: string | null = await getFullPath(fileName as string);
