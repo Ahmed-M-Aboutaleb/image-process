@@ -4,8 +4,9 @@
     "description": "Simple image scale project",
     "main": "/dist/index.js",
     "scripts": {
-        "start": "node dist/index.js",
-        "start:dev": "nodemon src/index.ts",
+        "start": "nodemon src/index.ts",
+        "lint": "eslint . --ext .ts",
+        "prettier": "prettier --config .prettierrc.json 'src' --write",
         "build": "npx tsc",
         "jasmine": "npx jasmine",
         "test": "npm run build && npm run jasmine"
@@ -22,15 +23,25 @@
     "homepage": "https://github.com/Ahmed-M-Aboutaleb/image-process#readme",
     "dependencies": {
         "express": "^4.18.1",
-        "sharp": "^0.30.4"
+        "jasmine": "^4.1.0",
+        "jasmine-spec-reporter": "^7.0.0",
+        "sharp": "^0.30.4",
+        "supertest": "^6.2.3"
     },
     "devDependencies": {
         "@types/express": "^4.17.13",
         "@types/jasmine": "^4.0.3",
         "@types/node": "^17.0.31",
-        "jasmine": "^4.1.0",
-        "jasmine-spec-reporter": "^7.0.0",
+        "@types/sharp": "^0.30.2",
+        "@types/supertest": "^2.0.12",
+        "@typescript-eslint/eslint-plugin": "^5.22.0",
+        "@typescript-eslint/parser": "^5.22.0",
+        "eslint": "^8.14.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.0.0",
         "nodemon": "^2.0.16",
+        "prettier": "^2.6.2",
+        "ts-node": "^10.7.0",
         "typescript": "^4.6.4"
     }
 }
