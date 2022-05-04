@@ -1,5 +1,6 @@
 import path from 'path';
 import * as fs from 'fs';
+import sharp from 'sharp';
 
 const imagesPath = path.resolve(__dirname, '../images/full');
 const thumbsPath = path.resolve(__dirname, '../images/thumb');
@@ -95,5 +96,27 @@ export async function isImgCached(thumb: string): Promise<boolean> {
         return true;
     } catch {
         return false;
+    }
+}
+
+/**
+ *
+ * @param img string
+ * @param width number
+ * @param height number
+ * @param thumb string
+ * @returns boolean value if img resized or no
+ *
+ * Resize the img
+ *
+ */
+
+export async function editImg(img:string, width:number, height:number, thumb:string): Promise<boolean> {
+    !fs.existsSync(thumbsPath) && fs.mkdirSync(thumbsPath) // Check if thumb dir exist and if not it creates it
+    try {
+        await sharp(img as string).resize(width, height).toFormat('jpeg').toFile(thumb as string);
+        return true
+    }catch {
+        return false
     }
 }

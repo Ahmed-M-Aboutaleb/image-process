@@ -23,10 +23,7 @@
     "homepage": "https://github.com/Ahmed-M-Aboutaleb/image-process#readme",
     "dependencies": {
         "express": "^4.18.1",
-        "jasmine": "^4.1.0",
-        "jasmine-spec-reporter": "^7.0.0",
-        "sharp": "^0.30.4",
-        "supertest": "^6.2.3"
+        "sharp": "^0.30.4"
     },
     "devDependencies": {
         "@types/express": "^4.17.13",
@@ -42,6 +39,9 @@
         "nodemon": "^2.0.16",
         "prettier": "^2.6.2",
         "ts-node": "^10.7.0",
-        "typescript": "^4.6.4"
+        "typescript": "^4.6.4",
+        "supertest": "^6.2.3",
+        "jasmine": "^4.1.0",
+        "jasmine-spec-reporter": "^7.0.0"
     }
 }

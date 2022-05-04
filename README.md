@@ -36,6 +36,12 @@ npm run start
 npm run test
 ```
 
+## Endpoint to resize images
+
+```sh
+localhost:3000/api/images?filename=<ImageName>
+```
+
 ## Author
 
 👤 **Ahmed-M-Aboutaleb**

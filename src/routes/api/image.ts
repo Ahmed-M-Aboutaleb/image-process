@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
-import sharp from 'sharp';
 import {
+    editImg,
     getFullPath,
     getThumbPath,
     isImageAvailable,
@@ -14,33 +14,27 @@ imageApi.get('/images', async (req: Request, res: Response) => {
     const width = Number(req.query.width);
     const height = Number(req.query.height);
 
-    if (fileName && width && height) {
+    if (fileName) {
         const img: string | null = await getFullPath(fileName as string);
-        const thumb: string | null = await getThumbPath(
-            width,
-            height,
-            fileName as string
-        );
         const isNameCorrect = await isImageAvailable(fileName as string);
+        
+        !isNameCorrect && res.status(400).send('Sorry but the image not found 😞');
+        if(width && height) {
+            width < 1 && res.status(400).send('Enter valid width 😑');
+            height < 1 && res.status(400).send('Enter valid heigh 😑');
+            const thumb: string | null = await getThumbPath(
+                width,
+                height,
+                fileName as string
+            );
+            const isCached = await isImgCached(thumb as string);
 
-        if (isNameCorrect === false) {
-            res.status(400).send('Sorry but the image not found 😞');
-        }
+            isCached && res.status(200).sendFile(thumb as string)
 
-        const isCached = await isImgCached(thumb as string);
-
-        if (isCached === true) {
-            res.status(200).sendFile(thumb as string);
-        }
-
-        try {
-            await sharp(img as string)
-                .resize(width, height)
-                .toFormat('jpeg')
-                .toFile(thumb as string);
-            res.status(200).sendFile(thumb as string);
-        } catch {
-            res.status(400).send('Sorry but something went wrong 😞');
+            const editedImg = await editImg(img as string, width, height, thumb as string)
+            editedImg ? res.status(200).sendFile(thumb as string) : res.status(400).send('Sorry but something went wrong 😞');
+        } else {
+            res.status(200).sendFile(img as string);
         }
     } else {
         res.status(400).send('Sorry but fill all inputs 😞');
